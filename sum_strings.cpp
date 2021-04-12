@@ -18,7 +18,7 @@ std::string cutZeros(std::string& S)
 
 std::string sum_strings(const std::string& a, const std::string& b) 
 {
-    std::string A = a, B =b , result;
+    std::string A = a, B = b , result;
     A = cutZeros(A); B = cutZeros(B);    
     if(A.length() < B.length()) Swap(A,B,std::string);   
 
