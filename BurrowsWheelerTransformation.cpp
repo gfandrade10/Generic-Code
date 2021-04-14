@@ -12,10 +12,7 @@ std::pair<std::string, int> encode(const std::string &s)
     vec.push_back(s);
     for (size_t i = 0; i < n-1; i++)
     {
-        std::string buffer = "";
-        buffer.push_back((vec[i])[n-1]);
-        buffer += (vec[i]);
-        buffer.erase(buffer.end() - 1);
+        std::string buffer = (vec[i])[n-1] + (vec[i]).substr(0,n-1);
         vec.push_back(buffer);
     }
     std::sort(vec.begin(), vec.end());
