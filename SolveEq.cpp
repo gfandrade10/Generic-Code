@@ -51,7 +51,7 @@ int main()
     int eq[3][4] = {{2, 1, 3, 10}, {-3, -2, 7, 5}, {3, 3, -4, 7}};
     solution = solveEq(eq);
     for(size_t i = 0; i<3; ++i)
-        std::cout << "X[" << i+1 << "]:  " << solution[i] << std::endl;
+        std::cout << "X[" << i+1 << "]: " << solution[i] << std::endl;
     std::cin.get();
     return 0;
 }
