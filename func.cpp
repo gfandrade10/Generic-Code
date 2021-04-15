@@ -56,7 +56,6 @@ int main(int argc, char const *argv[])
 {
     auto Print = [](const bool& flag){if(flag) std::cout << "TRUE" << std::endl;
     else std::cout << "FALSE" << std::endl;};
-
     Print(sameLetterPattern("GUILHERME", "IBCDEFGHI"));
 
     std::cin.get();
