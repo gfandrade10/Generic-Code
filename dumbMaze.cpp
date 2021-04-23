@@ -15,7 +15,7 @@ std::pair<int,int> move(std::pair<int,int> pair)
 bool path_finder(const std::string& maze) 
 {
     srand(time(NULL));
-    int counter = 0, absolute = 0;
+    size_t absolute = 0;
     std::string Maze = "";
     for (const auto& a:maze)
         { if(a == '.' || a == 'W') Maze += a; }
