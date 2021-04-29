@@ -70,6 +70,6 @@ std::string format_duration(int seconds)
 
 int main(int argc, char** argv)
 {
-    std::cout << format_duration(120) << std::endl;
+    std::cout << format_duration(4156415) << std::endl;
     return EXIT_SUCCESS;
 }
