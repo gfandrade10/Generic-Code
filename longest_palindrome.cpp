@@ -53,6 +53,6 @@ string longest_palindrome(const string& input)
 
 int main(int argc, char const *argv[])
 {
-    std::cout << longest_palindrome("66racecar") << "\n\n";
+    std::cout << longest_palindrome("66racecarxdahannah47") << "\n\n";
     return 0;
 }
