@@ -19,7 +19,7 @@ std::vector<int> PrimeDecomp::GetPrimes(int lst)
         int count = 0;
         for(int j = 3; j < i; j = j+2)
             if(i%j == 0) count++;
-        if(count == 0) result.push_back(i);
+        if(count == 0 && lst%i == 0) result.push_back(i);
     }
     result.push_back(lst);
     return result;
