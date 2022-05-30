@@ -29,6 +29,7 @@ long parse_int(std::string number)
     char input[number.length()+1];
     for(std::size_t i = 0; i < number.length(); i++)
         input[i] = number[i];
+    input[number.length()] = '\0';
     char* Token = strtok(input, " -");
     while(Token != NULL)
     {
