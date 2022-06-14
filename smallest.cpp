@@ -1,71 +1,85 @@
 #include <iostream>
 #include <string>
-#include <string.h>
 #include <vector>
-#include <cmath>
 #include <algorithm>
+
+typedef std::string String;
+typedef std::string::iterator Siter;
+typedef long long ll;
 
 namespace ToSmallest
 {
-    using LL = long long;
-    size_t num_size(const LL& n)
+    String Swap (const String& input, Siter insert, Siter place)
     {
-        double x = log10(n);
-        if(pow(10,x) == n) return size_t(x+1);
-        else return (size_t)(ceil(x));
-    }
-
-    template<typename T>
-    void swap(T& a, T&b)
-    {
-        T buffer;
-        buffer = a; a = b; b = buffer;
-    }
-
-    size_t num(const char& c)
-    {
-        return (size_t)(c - '0');
-    }
-
-    std::vector<LL> smallest(const LL& n)
-    {
-        std::vector<LL> result;
-        char S[num_size(n)];
-        char aux[num_size(n)];
-        size_t flag;
-        itoa(n, S, 10); 
-        itoa(n, aux, 10);
-        std::sort(aux, aux + num_size(n));
-        int iter_i = -1, iter_j = -1;
-        LL max = 0; 
-        LL min = 10;
-        for(size_t i = 1; i < num_size(n); i++)
+        String tmp = "";
+        for (auto it = input.begin(); it != input.end(); ++it)
         {
-            if(num(S[i]) == 0) iter_j = i;
-            else break;
+            if (it == place)
+                tmp.push_back(*insert);
+            if (it != insert)
+                tmp.push_back(*it);
         }
-        if(iter_j > 0)
-        {
-            swap<char>(S[0],S[iter_j]);
-            return {atoi(S), 0 , iter_j};
-        }
-        if (num(S[0]) == num(aux[0])) flag = 1;
-        else flag = 0;
-        for (size_t i = flag; i < num_size(n); i++)
-        {
-            if(num(S[i]) > max){max = num(S[i]); iter_i = i;}
-            if(num(S[i]) < min){min = num(S[i]); iter_j = i;}
-        }
-        if(iter_i < iter_j) swap<char>(S[iter_i], S[iter_j]);
-        return {atoi(S), iter_i , iter_j};
+        return tmp;
     }
-}
 
-int main(int argc, char const *argv[])
+    std::vector<ll> smallest(ll n)
+    {
+        String str = std::to_string(n), buffer(str);
+        auto it = std::min_element(str.begin(),str.end());
+        auto tmp = str.begin();
+        while(it == tmp)
+        {
+            tmp++;
+            it = std::min_element(tmp,str.end());
+        }
+        auto ZeroFinder = str.begin()+1;
+        while (*ZeroFinder == '0')
+        {
+            ZeroFinder++; 
+            buffer = Swap(str,str.begin(),ZeroFinder);
+            tmp = ZeroFinder-1;
+        }
+        for (auto iter = it; iter != str.end(); ++iter)
+        {   
+            if (*iter <= *it)
+                it = iter;
+        }
+        if (std::stoll(Swap(str,it,tmp)) < std::stoll(buffer))
+            buffer = Swap(str,it,tmp);
+        else
+            return {std::stoll(buffer), 0 ,tmp-str.begin()};
+
+        ll value = std::stoll(str);
+        auto pos = it;
+        for(auto it2 = str.begin(); it2 != str.end(); ++it2)
+        {
+            ll calc = std::stoll(Swap(str,str.begin(),it2));
+            if(calc < value)
+            { value = calc; pos = it2; }         
+        }
+        if(value <= std::stoll(buffer))
+            return {value, 0, pos - str.begin()};
+
+        ll distance = tmp - str.begin();
+        for (ll i = tmp - str.begin(); i >= 0; i--)
+        {
+            if (buffer[i] == *tmp)
+            { distance = (ll)i; }
+        }
+        auto iter = it;
+        while(*iter == *it)
+            iter--;
+
+        return {std::stoll(buffer), iter-str.begin()+1, distance};
+    }
+};
+
+int main(int argc, char* argv[])
 {
-    for(auto& e:ToSmallest::smallest(261235))
-        std::cout << e << " ";
-    std::cout << std::endl;
-    std::cin.get();
+    ll num = 239687;
+    std::vector<ll> res = ToSmallest::smallest(num);
+    for (auto& e: res)
+        std::cout << e << "  ";
+    std::cout << "\n\n";
     return 0;
 }
