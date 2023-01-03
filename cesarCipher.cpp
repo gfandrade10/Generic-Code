@@ -14,7 +14,8 @@ std::string caesarCipher(std::string s, int k)
         buffer[i] = s[i];
 
     for(int i=0; i<(int)s.length(); i++)
-    {   if (buffer[i] >= 'A' && buffer[i] <='Z')
+    {   
+        if (buffer[i] >= 'A' && buffer[i] <='Z')
         {
             let = (int)buffer[i];
             let += k;
