@@ -7,6 +7,7 @@ std::string changeCase(const std::string &identifier,
     const std::string &targetCase)
 {
     std::vector<std::string> op;
+    std::string s {identifier};
     bool id = true;
     int n = (int)identifier.size(), ref = 0;
     char key = '*';
@@ -44,12 +45,13 @@ std::string changeCase(const std::string &identifier,
         {
             if (identifier[i] == key && i != ref)
             {
-                op.emplace_back(identifier.substr(ref, i - ref));
+                s[i] = std::tolower(identifier[i]);
+                op.emplace_back(s.substr(ref, i - ref));
                 if (i < n-1)
                     ref = i + 1;
             }
             if (i == n-1 && op.size() > 0)
-                op.emplace_back(identifier.substr(ref));    
+                op.emplace_back(s.substr(ref));    
             if ((key == '-' && identifier[i] == '_') ||
                 (key == '_' && identifier[i] == '-') ||
                 (identifier[i] >= 'A' && identifier[i] <= 'Z'))
@@ -62,20 +64,14 @@ std::string changeCase(const std::string &identifier,
     {
         if (key == '_') return identifier;
         for (auto &e: op)
-        {
-            std::transform(e.begin(), e.end(), e.begin(), ::tolower);
             res += e + "_";
-        }
         return res.substr(0, res.length()-1);
     }
     else if (targetCase == "kebab")
     {
         if (key == '-') return identifier;
         for (auto &e: op)
-        {
-            std::transform(e.begin(), e.end(), e.begin(), ::tolower);
             res += e + "-";
-        }
         return res.substr(0, res.length()-1);
     }
     else if (targetCase == "camel")
