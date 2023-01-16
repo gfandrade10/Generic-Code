@@ -33,11 +33,12 @@ std::string changeCase(const std::string &identifier,
         {
             if (identifier[i] >= 'A' && identifier[i] <= 'Z')
             {
-                op.emplace_back(identifier.substr(ref, i - ref));                
+                s[i] = std::tolower(identifier[i]);
+                op.emplace_back(s.substr(ref, i - ref));                
                 ref = i;
             }
             if (i == n-1 && op.size() > 0)
-                op.emplace_back(identifier.substr(ref)); 
+                op.emplace_back(s.substr(ref)); 
             if (identifier[i] == '-' || identifier[i] == '_') 
                 return "";
         }
@@ -45,7 +46,6 @@ std::string changeCase(const std::string &identifier,
         {
             if (identifier[i] == key && i != ref)
             {
-                s[i] = std::tolower(identifier[i]);
                 op.emplace_back(s.substr(ref, i - ref));
                 if (i < n-1)
                     ref = i + 1;
