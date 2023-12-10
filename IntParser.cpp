@@ -25,8 +25,7 @@ long parse_int(std::string number)
     long Res = 0, Ref = 0;
     int count = 0;
     char input[number.length()+1];
-    for(std::size_t i = 0; i < number.length(); i++)
-        input[i] = number[i];
+    std::memcpy(input, &number[0], number.length());
     input[number.length()] = '\0';
     char* Token = strtok(input, " -");
     while(Token != NULL)
@@ -71,7 +70,7 @@ long parse_int(std::string number)
 
 int main(int argc, char** argv)
 {
-    std::string Input = "three hundred seventy six million nine hundred";
+    std::string Input = "three hundred seventy seven";
     std::cout << parse_int(Input) << "\n\n";
     return 0;
 }
