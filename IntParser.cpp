@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <utility>
 
-typedef std::vector< std::tuple<const char*, int, bool> > TupleVector;
-
-static TupleVector RefMap = {
+static std::vector<std::tuple<const char*, int, bool>> RefMap = {
     {"one", 1, true}, {"two", 2, true}, {"three", 3, true},
     {"four", 4, true}, {"five", 5, true}, {"six", 6, true}, 
     {"seven", 7, true}, {"eight", 8, true}, {"nine", 9, true}, 
