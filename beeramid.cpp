@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 int beeramid(int bonus, double price)
 {
