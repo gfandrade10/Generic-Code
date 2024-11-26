@@ -21,11 +21,12 @@ char_pos_t find_position(char c)
     return (char_pos_t){0, false};
 }
 
-uint64_t custom_power(uint64_t base, uint64_t expo)
+uint64_t custom_power(uint64_t expo)
 {
+    if (expo == 0) return 1;
     uint64_t res = 1;
-    for(uint64_t i = 0; i < expo; ++i)
-        res = res * base;
+    for (uint64_t i = 0; i < expo; ++i)
+        res <<= 6;
     return res;
 }
 
@@ -58,7 +59,7 @@ uint64_t base64_to_base10(const char *base64)
     for(uint64_t i = 0; i < len; ++i)
     {
         uint64_t temp = find_position(str64[i]).pos;
-        val += temp * custom_power(64,i);
+        val += temp * custom_power(i);
     }
 
     free(str64);
@@ -70,7 +71,7 @@ bool check_valid_input(int argc, char** argv)
     if(argc == 2)
     {
         uint64_t len = strlen(argv[1]);
-        for(uint64_t i =0; i < len; ++i)
+        for(uint64_t i = 0; i < len; ++i)
         {
             if(!find_position(argv[1][i]).valid)
                 return false;
