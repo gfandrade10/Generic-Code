@@ -27,25 +27,27 @@ namespace BestTravel
     int chooseBestSum(int t, int k, const std::vector<int> &ls)
     {
         size_t size = ls.size();
-        int maxValue = Combination(k, size);
+        size_t maxValue = Combination(k, size);
         std::map<std::set<int>, int> combinationSet;
         std::random_device rd;
         std::mt19937 seed(rd());
         std::uniform_int_distribution<> gen(0, size - 1);
        
         int counter = 0;
-        while (combinationSet.size() < (size_t)maxValue)
+        while (combinationSet.size() < maxValue)
         {
             std::set<int> tempSet;
             while(tempSet.size() < (size_t)k)
                 tempSet.insert(gen(seed));
 
-            int sum = 0;
-            for(const auto& it: tempSet)
-                sum += ls[it];
-            
             if(combinationSet.find(tempSet) == combinationSet.end())
+            {
+                int sum = 0;
+                for(const auto& it: tempSet)
+                    sum += ls[it];
+                
                 combinationSet.insert({tempSet, sum});
+            }
 
             if(counter == (maxValue * maxValue))
                 break;
