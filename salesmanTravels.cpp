@@ -43,7 +43,6 @@ namespace SalesmanTravel
                         i += zl + 1;
                         line_starter = s_ptr(&data[i]);
                     }
-
                 }
             }
         }
